@@ -5,12 +5,6 @@ class WorkWithApi(ABC):
     """ Абстрактный класс для работы с API """
 
     @abstractmethod
-    def __init__(self):
-        """ Абстрактный класс инициализации """
-
-        pass
-
-    @abstractmethod
     def _connecting_to_website(self):
         """ Абстрактный метод для подключения к сайту """
 

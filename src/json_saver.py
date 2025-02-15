@@ -52,15 +52,20 @@ class JSONSaver(AbsSaver):
         """ Метод удаления данных """
 
         python_file = self.get_read()
+        clone_file = python_file.copy()
 
         try:
-            for vacancies in python_file:
+            for vacancies in clone_file:
                 if vacancies_id in vacancies:
-                    python_file.remove(vacancies)
-            self.get_save(python_file)
+                    clone_file.remove(vacancies)
+            if clone_file == python_file:
+                print("Кажется такого нет.")
+            self.get_save(clone_file)
 
         except KeyError:
             print("Указанный ID не найден")
+
+        return clone_file
 
     def get_save(self, python_file):
         """ Метод сохранения данных в файл """

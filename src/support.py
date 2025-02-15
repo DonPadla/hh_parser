@@ -7,15 +7,7 @@ def search(search_request: str) -> None:
     """ Вспомогательная функция для поиска вакансий """
 
     saver = JSONSaver()
-    data_v = (
-        Vacancy.cast_to_object_list
-            (
-            HeadHunterAPI
-                (
-                search_request
-            )
-            .get_vacancies())
-    )
+    data_v = (Vacancy.cast_to_object_list(HeadHunterAPI(search_request).get_vacancies()))
     saver.get_add(data_v)
     print("Все, что удалось найти, бережно помещено в \"vacancies.json\" в папке \"data\".")
 
@@ -59,5 +51,8 @@ def search_in_description(keyword: str) -> list[dict]:
 
         if keyword in responsibility:
             search_list.append(element)
+
+    if len(search_list) == 0:
+        print("Возможно, \"та самая\" еще не создана")
 
     return search_list
